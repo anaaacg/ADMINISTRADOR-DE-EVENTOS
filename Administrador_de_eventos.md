@@ -284,9 +284,10 @@ Implementan la lógica de interacción: lectura de comandos, separación en pala
     - y crea el objeto `Comando` correspondiente (si se usa el modelo con herencia).
 
 ## Diagramas
-- Diagrama UML
+- Diagrama UML: https://lucid.app/lucidchart/fd4aef67-e40e-4eb3-8beb-ad288b54c827/edit?viewport_loc=48%2C111%2C1752%2C751%2CHWEp-vi-RSFO&invitationId=inv_10a7cb7d-19be-433e-b737-942af21bb318
 - Diagramas de flujo: 
 - Diagrams de entrada, proceso y salida: 
+
 
 
 
