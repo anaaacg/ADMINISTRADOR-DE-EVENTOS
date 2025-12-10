@@ -285,8 +285,9 @@ Implementan la lógica de interacción: lectura de comandos, separación en pala
 
 ## Diagramas
 - Diagrama UML: https://lucid.app/lucidchart/fd4aef67-e40e-4eb3-8beb-ad288b54c827/edit?viewport_loc=48%2C111%2C1752%2C751%2CHWEp-vi-RSFO&invitationId=inv_10a7cb7d-19be-433e-b737-942af21bb318
-- Diagramas de flujo: 
+- Diagramas de flujo: https://lucid.app/lucidchart/a95e398a-5158-49a4-bbf8-9ed3ebae6404/edit?viewport_loc=-144%2C-109%2C2940%2C1260%2C0eqBfotfVGlV&invitationId=inv_cf2dbdb9-4300-4b60-8aa3-b31eac621822
 - Diagrams de entrada, proceso y salida: 
+
 
 
 
