@@ -170,7 +170,7 @@ Pasos:
 4. Ordenar esos eventos por nombre en orden ascendente.
 5. Imprimir solo los nombres, un nombre por línea.
 
-## Lógica específica: comando Print 
+### Lógica específica: comando Print 
 Formato del comando:
 - `Print`
 Pasos:
@@ -217,10 +217,76 @@ Lógica general:
      - Mostrar:
        `Unknown command: COMANDO`
      - Terminar la ejecución del programa.
+       
+## Organizacion del codigo
+### Clases
+Representan los datos. Se almacenan y hacen las funciones correspondientes a cada uno.
+- **Fecha**
+  - Atributos: `anio`, `mes`, `dia`.
+  - Funciones principales:
+    - Comparar dos fechas (`fechasIguales`, `compararFechas`).
+    - Convertir la fecha a texto en formato `AAAA-MM-DD` (`aCadena`).
+  - Se usa en todos los lugares donde se necesite trabajar con fechas ya validadas.
+- **Evento**
+  - Atributos: una `Fecha` y el nombre del evento (`char*`).
+  - Funciones principales:
+    - Comparar si un evento coincide con una fecha + nombre (para buscar o eliminar).
+    - Comparar eventos entre sí (por fecha y por nombre) para poder ordenarlos.
+- **BaseDatos**
+  - Atributos: arreglo dinámico de `Evento`, tamaño actual y capacidad.
+  - Funciones principales (con el tiempo cubrirán todo el enunciado):
+    - Agregar evento (usado por `Add`).
+    - Eliminar un solo evento por fecha + nombre (`Del FECHA EVENTO`).
+    - Eliminar todos los eventos de una fecha (`Del FECHA`).
+    - Buscar eventos por fecha (`Find FECHA`).
+    - Buscar eventos por palabra en el nombre (`Find PALABRA`).
+    - Obtener todos los eventos ordenados para `Print`.
+    - Editar un evento: localizarlo, eliminarlo y agregar la versión modificada (`Edit`).
+- **Clases de comando**
+  - `Comando` (base abstracta) y derivados como:
+    - `ComandoAgregar`, `ComandoEliminar`, `ComandoFind`, `ComandoPrint`, `ComandoEdit`.
+  - Cada comando:
+    - Guarda los datos ya parseados (fecha, palabra, nombre, etc.).
+    - Tiene una función `ejecutar(BaseDatos&)` que llama a los métodos de `BaseDatos`.
+  - Sirve para organizar mejor la lógica cuando el proyecto esté más avanzado (herencia y polimorfismo).
+- **Manejador de Archivo**
+  - Clase encargada de guardar y cargar todos los eventos de `BaseDatos` en un archivo de texto plano.
+  - Permite que al iniciar el programa se recupere la información, y al terminar se persista.
+
+### Funciones externas
+Implementan la lógica de interacción: lectura de comandos, separación en palabras y validación del formato antes de usar las clases.
+- **Entrada y separación de palabras**
+  - `leerLinea(buffer, tam)`  
+    Lee una línea completa desde la entrada estándar.
+  - `dividirEnPalabras(linea, palabras, maxPalabras, cantPalabras)`  
+    Separa la línea por espacios en: `comando`, `arg1`, `arg2`, etc.
+- **Validación y conversión de fecha (texto → Fecha)**
+  - `esDigito(c)`  
+    Verifica si un carácter es un dígito.
+  - `leerEntero(texto, pos, valor)`  
+    Lee un entero con signo desde un `char*`, avanzando la posición.
+  - `convertirTextoEnFecha(textoFecha, fechaResultado)`  
+    - Verifica el formato `Año-Mes-Día`.
+    - Muestra los mensajes de error necesarios:
+      - `Wrong date format: DATE`
+      - `Month value is invalid: M`
+      - `Day value is invalid: D`
+    - Si todo es correcto, llena un objeto `Fecha` que luego usarán las clases.
+- **Apoyo para búsquedas y ordenamiento**
+  - Funciones para comparar nombres de eventos (basadas en `strcmp`).
+  - Función para verificar si un nombre contiene una palabra (`contieneSubcadena`), usada en `Find PALABRA`.
+  - Funciones auxiliares para intercambiar eventos y ordenar (`swapEventos`, algoritmos de ordenamiento simples).
+- **Funciones de integración con comandos**
+  - Una función que:
+    - lee la línea,
+    - separa en palabras,
+    - decide qué tipo de comando es,
+    - y crea el objeto `Comando` correspondiente (si se usa el modelo con herencia).
 
 ## Diagramas
 - Diagrama UML
 - Diagramas de flujo: 
 - Diagrams de entrada, proceso y salida: 
+
 
 
